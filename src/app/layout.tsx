@@ -13,6 +13,7 @@ const telemetryFont = IBM_Plex_Mono({
   subsets: ['latin'],
   weight: ['400', '700'],
 });
+
 export const metadata: Metadata = {
   title: 'Logistics App',
   description: 'Delivery logistics',
