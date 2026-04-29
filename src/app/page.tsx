@@ -1,5 +1,7 @@
 import Image from 'next/image';
 
 export default function Home() {
-  return <div className="">Logistic</div>;
+  return (
+    <div className="grid place-items-center h-screen text-4xl">Logistic</div>
+  );
 }
