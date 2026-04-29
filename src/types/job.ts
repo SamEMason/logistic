@@ -1,4 +1,8 @@
-export type JobState = IdleState | PreppingState | TransitState | CompletedState;
+export type JobState =
+  | IdleState
+  | PreppingState
+  | TransitState
+  | CompletedState;
 
 export type IdleState = {
   type: 'IDLE';
