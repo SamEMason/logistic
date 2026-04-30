@@ -1,6 +1,17 @@
 'use client';
 
 import { useCounterStore } from '@/store';
+import { useEffect } from 'react';
+
+const logCount = () => {
+  useCounterStore.setState(() => ({
+    count: 780,
+  }));
+
+  const count = useCounterStore.getState().count;
+
+  console.log('count:', count);
+};
 
 export default function Home() {
   return <OtherComponent />;
@@ -8,14 +19,18 @@ export default function Home() {
 
 function OtherComponent() {
   const count = useCounterStore((state) => state.count);
-  const increment = useCounterStore((state) => state.increment);
-  const decrement = useCounterStore((state) => state.decrement);
+  const increment = useCounterStore((state) => state.incrementAsync);
+  const decrement = useCounterStore((state) => state.decrementAsync);
+
+  useEffect(() => {
+    logCount();
+  }, []);
 
   return (
     <div className="flex items-center justify-center gap-4 h-screen">
       <div className="flex items-center justify-center gap-4 h-32">
         <button
-          onClick={() => decrement()}
+          onClick={decrement}
           className="h-full w-32 px-4 rounded-tr-2xl rounded-bl-2xl text-4xl bg-amber-900 cursor-pointer"
         >
           -
@@ -24,7 +39,7 @@ function OtherComponent() {
           {count}
         </span>
         <button
-          onClick={() => increment()}
+          onClick={increment}
           className="h-full w-32 px-4 rounded-tl-2xl rounded-br-2xl text-4xl bg-amber-600 cursor-pointer"
         >
           +
