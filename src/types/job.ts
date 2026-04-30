@@ -10,16 +10,16 @@ export type IdleState = {
 
 export type PreppingState = {
   type: 'PREPPING';
-  prepStartTime: number;
+  prepStartTime: number | null;
 };
 
 export type TransitState = {
   type: 'TRANSIT';
   itemsChecked: boolean;
-  transitStartTime: number;
+  transitStartTime: number | null;
 };
 
 export type CompletedState = {
   type: 'COMPLETED';
-  completedTime: number;
+  completedTime: number | null;
 };
