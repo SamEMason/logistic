@@ -8,44 +8,38 @@ import {
   TransitState,
 } from './types/job';
 import { persist } from 'zustand/middleware';
+import { JOB_STATE } from './constants/jobstate';
 
 type JobStore = {
   jobState: JobState;
   transition: () => void;
+  _seedState: (targetState: string) => void;
   reset: () => void;
 };
 
 // IDLE state set as initial system state
-const idleState: IdleState = { type: 'IDLE', timestamp: null };
+const idleState: IdleState = { type: JOB_STATE.idle, timestamp: null };
 
 // IDLE state set as initial system state
 const preppingState: PreppingState = {
-  type: 'PREPPING',
+  type: JOB_STATE.prepping,
   timestamp: null,
   itemsChecked: false,
 };
 
 const transitState: TransitState = {
-  type: 'TRANSIT',
+  type: JOB_STATE.transit,
   timestamp: null,
 };
 
 const arrivedState: ArrivedState = {
-  type: 'ARRIVED',
+  type: JOB_STATE.arrived,
   timestamp: null,
 };
 
 const completedState: CompletedState = {
-  type: 'COMPLETED',
+  type: JOB_STATE.completed,
   timestamp: null,
-};
-
-const StateTransitions: Record<JobState['type'], JobState['type'] | 'RESET'> = {
-  IDLE: 'PREPPING',
-  PREPPING: 'TRANSIT',
-  TRANSIT: 'ARRIVED',
-  ARRIVED: 'COMPLETED',
-  COMPLETED: 'RESET',
 };
 
 export const useJobStore = create<JobStore>()(
@@ -58,7 +52,7 @@ export const useJobStore = create<JobStore>()(
         const { jobState, reset } = get();
         const now = Date.now();
 
-        if (jobState.type === 'COMPLETED') {
+        if (jobState.type === JOB_STATE.completed) {
           reset();
           return;
         }
@@ -92,7 +86,7 @@ export const useJobStore = create<JobStore>()(
         set({ jobState: state });
       },
 
-      reset: () => set({ jobState: idleState }),
+      reset: () => set({ jobState: { ...idleState, timestamp: Date.now() } }),
     }),
     {
       name: 'logistic-storage',
