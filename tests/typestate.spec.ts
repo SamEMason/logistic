@@ -21,19 +21,6 @@ describe('TypeState transition functionality', () => {
     expect(store.getState().jobState.timestamp).not.toBeNull();
   });
 
-  test('FSM Logic: PREPPING to TRANSITION', () => {
-    const store = useJobStore;
-
-    store.getState()._seedState(JOB_STATE.prepping);
-
-    // Transition
-    store.getState().transition();
-
-    // Verify
-    expect(store.getState().jobState.type).toBe(JOB_STATE.transit);
-    expect(store.getState().jobState.timestamp).not.toBeNull();
-  });
-
   test('FSM Logic: PREPPING to TRANSIT', () => {
     const store = useJobStore;
 
