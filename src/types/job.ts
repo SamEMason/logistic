@@ -2,24 +2,35 @@ export type JobState =
   | IdleState
   | PreppingState
   | TransitState
+  | ArrivedState
   | CompletedState;
 
-export type IdleState = {
+type GeneralState = {
+  timestamp: number | null;
+  location?: {
+    x: number;
+    y: number;
+    notes?: string;
+  };
+};
+
+export type IdleState = GeneralState & {
   type: 'IDLE';
 };
 
-export type PreppingState = {
+export type PreppingState = GeneralState & {
   type: 'PREPPING';
-  prepStartTime: number | null;
-};
-
-export type TransitState = {
-  type: 'TRANSIT';
   itemsChecked: boolean;
-  transitStartTime: number | null;
 };
 
-export type CompletedState = {
+export type TransitState = GeneralState & {
+  type: 'TRANSIT';
+};
+
+export type ArrivedState = GeneralState & {
+  type: 'ARRIVED';
+};
+
+export type CompletedState = GeneralState & {
   type: 'COMPLETED';
-  completedTime: number | null;
 };
