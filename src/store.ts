@@ -40,6 +40,14 @@ const completedState: CompletedState = {
   timestamp: null,
 };
 
+const StateTransitions: Record<JobState['type'], JobState['type'] | 'RESET'> = {
+  IDLE: 'PREPPING',
+  PREPPING: 'TRANSIT',
+  TRANSIT: 'ARRIVED',
+  ARRIVED: 'COMPLETED',
+  COMPLETED: 'RESET',
+};
+
 export const useJobStore = create<JobStore>()(
   persist(
     (set, get) => ({
@@ -48,25 +56,25 @@ export const useJobStore = create<JobStore>()(
       transition: () => {
         // Get current Job State
         const { jobState, reset } = get();
+        const now = Date.now();
 
-        switch (jobState.type) {
-          case 'IDLE':
-            set({ jobState: { ...preppingState, timestamp: Date.now() } });
-            break;
-          case 'PREPPING':
-            set({
-              jobState: { ...transitState, timestamp: Date.now() },
-            });
-            break;
-          case 'TRANSIT':
-            set({ jobState: { ...arrivedState, timestamp: Date.now() } });
-            break;
-          case 'ARRIVED':
-            set({ jobState: { ...completedState, timestamp: Date.now() } });
-            break;
-          case 'COMPLETED':
-            reset();
-            break;
+        if (jobState.type === 'COMPLETED') {
+          reset();
+          return;
+        }
+
+        const transitions = {
+          IDLE: { ...preppingState, timestamp: now },
+          PREPPING: { ...transitState, timestamp: now },
+          TRANSIT: { ...arrivedState, timestamp: now },
+          ARRIVED: { ...completedState, timestamp: now },
+        } as const;
+
+        const nextState =
+          transitions[jobState.type as keyof typeof transitions];
+
+        if (nextState) {
+          set({ jobState: nextState as JobState });
         }
       },
 
