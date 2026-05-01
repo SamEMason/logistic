@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { JetBrains_Mono, IBM_Plex_Mono } from 'next/font/google';
 import './globals.css';
+import Navbar from '@/components/Navbar';
+import PageWrapper from '@/components/PageWrapper';
 
 const uiFont = JetBrains_Mono({
   variable: '--font-ui',
@@ -29,7 +31,10 @@ export default function RootLayout({
       lang="en"
       className={`${uiFont.variable} ${telemetryFont.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="max-h-screen flex flex-col">
+        <Navbar />
+        <PageWrapper>{children}</PageWrapper>
+      </body>
     </html>
   );
 }
