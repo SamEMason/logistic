@@ -86,7 +86,12 @@ export const useJobStore = create<JobStore>()(
         set({ jobState: state });
       },
 
-      reset: () => set({ jobState: { ...idleState, timestamp: Date.now() } }),
+      reset: () => {
+        set({ jobState: { ...idleState, timestamp: Date.now() } });
+
+        // Trigger end of shift lifecycle logic below
+        // ...
+      },
     }),
     {
       name: 'logistic-storage',
