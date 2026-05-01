@@ -8,7 +8,6 @@ import {
   TransitState,
 } from './types/job';
 import { persist } from 'zustand/middleware';
-import Config from '@/config';
 
 type JobStore = {
   jobState: JobState;
@@ -100,7 +99,3 @@ export const useJobStore = create<JobStore>()(
     }
   )
 );
-
-if (typeof window !== 'undefined' && Config.NODE_ENV === 'DEV') {
-  (window as any).store = useJobStore;
-}
