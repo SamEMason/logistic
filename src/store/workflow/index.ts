@@ -1,16 +1,16 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { actionCreator } from './actions';
-import { initialState, JobStore } from './state';
+import { initialState, WorkflowStore } from './state';
 
-export const useJobStore = create<JobStore>()(
+export const useWorkflowStore = create<WorkflowStore>()(
   persist(
     (set, get, store) => ({
       ...actionCreator(set, get, store),
-      jobState: initialState,
+      workflow: initialState,
     }),
     {
-      name: 'logistic-storage',
+      name: 'workflow-storage',
     }
   )
 );

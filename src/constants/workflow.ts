@@ -1,4 +1,4 @@
-export const JOB_STATE = {
+export const WORKFLOW_STATE = {
   idle: 'IDLE',
   prepping: 'PREPPING',
   transit: 'TRANSIT',

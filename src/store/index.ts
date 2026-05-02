@@ -1,1 +1,1 @@
-export { useJobStore } from '@/store/jobs';
+export { useWorkflowStore } from '@/store/workflow';
