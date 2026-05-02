@@ -31,7 +31,7 @@ export default function RootLayout({
       lang="en"
       className={`${uiFont.variable} ${telemetryFont.variable} h-full antialiased`}
     >
-      <body className="max-h-screen flex flex-col">
+      <body className="h-full flex flex-col bg-amber-600">
         <Navbar />
         <PageWrapper>{children}</PageWrapper>
       </body>
