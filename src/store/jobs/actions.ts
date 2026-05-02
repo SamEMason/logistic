@@ -1,6 +1,6 @@
 import { StateCreator } from 'zustand';
 import { JobActions, JobStore } from './state';
-import { JobState } from '@/types/job';
+import { JobState } from '@/schemas/job';
 import { buildState, initialState, StateTransitions } from './state';
 import { JOB_STATE } from '@/constants/jobstate';
 

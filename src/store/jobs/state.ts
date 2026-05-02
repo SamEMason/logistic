@@ -6,7 +6,7 @@ import {
   JobState,
   PreppingState,
   TransitState,
-} from '@/types/job';
+} from '@/schemas/job';
 
 export type JobStore = {
   jobState: JobState;
