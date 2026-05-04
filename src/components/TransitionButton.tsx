@@ -10,7 +10,7 @@ export default function TransitionButton({
   return (
     <button
       onClick={transition}
-      className="drop-shadow-sm h-32 bg-amber-700 active:bg-amber-500 hover:cursor-pointer"
+      className="fl-text-base/4xl drop-shadow-sm h-32 bg-amber-700 active:bg-amber-500 hover:cursor-pointer"
     >
       {children}
     </button>

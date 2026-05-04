@@ -28,7 +28,7 @@ export default function Workflow() {
 
   return (
     <div className="flex flex-col flex-1 gap-4">
-      <h1 className="text-xl font-black">Workflow</h1>
+      <h1 className="fl-text-xl/4xl font-black">Workflow</h1>
       <CurrentBlock workflow={workflow} transition={transition} />
       <TransitionButton transition={transition}>Next Step</TransitionButton>
     </div>
